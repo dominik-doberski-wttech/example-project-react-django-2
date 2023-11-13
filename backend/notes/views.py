@@ -45,7 +45,7 @@ class HandleUserConnction(APIView):
 
 
     
-    def get_user(self, request):
+    def get(self, request):
         
         login = request.data.get('login')
         password = request.data.get('password')  # Assuming owner is an ID
