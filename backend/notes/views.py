@@ -36,3 +36,28 @@ class CreateNoteView(APIView):
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+class HandleUserConnction(APIView):
+
+    
+    queryset = User.objects.all()
+
+
+
+    
+    def get_user(self, request):
+        
+        login = request.data.get('login')
+        password = request.data.get('password')  # Assuming owner is an ID
+        try:
+            
+            if (User.objects.raw('SELECT count(*) FROM notes_user WHERE username LIKE "'+login+'" AND password LIKE "'+password+'"') == 1):
+            
+                return Response({'message': 'Note created successfully'}, status=status.HTTP_200_OK)
+            else:
+                return Response({'error': 'User not found'}, status=status.HTTP_418_IM_A_TEAPOT)
+        except:
+            return Response({'error': 'System error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            
+
+
