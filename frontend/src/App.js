@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {API_URL} from "./constants";
+import LoginPage from "./components/login";
 
 function App() {
 
@@ -51,6 +52,10 @@ function App() {
         }
     };
 
+    useEffect(()=>{
+
+    },[])
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -77,7 +82,8 @@ function App() {
     }, []);
 
     return (
-        <div>
+        <div className={"app"}>
+            <div className="functionality">
             <h1>Notes App</h1>
             <div>
                 <input
@@ -139,6 +145,8 @@ function App() {
                     </li>
                 ))}
             </ul>
+            </div>
+            <LoginPage />
         </div>
     );
 }

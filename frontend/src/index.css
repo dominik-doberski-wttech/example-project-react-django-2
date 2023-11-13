@@ -11,3 +11,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.app{
+  display: grid;
+  grid-column: 2;
+  grid-template-columns: 70% 30%;
+  grid-row: 1;
+  grid-template-rows: 100vh;
+  background-color: #edf6f9;
+}
+
+.LoginContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid rgba(0,0,0,0.25);
+}
+
+
