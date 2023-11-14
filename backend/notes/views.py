@@ -1,6 +1,6 @@
 from django.utils import timezone
 from django.shortcuts import render
-
+from django.db import connection
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -45,15 +45,20 @@ class HandleUserConnction(APIView):
 
 
     
-    def get(self, request):
+    def post(self, request):
         
-        login = request.data.get('login')
-        password = request.data.get('password')  # Assuming owner is an ID
+        login = str(request.data.get('login'))
+        password = str(request.data.get('password'))  # Assuming owner is an ID
+        print(login+password)
+        
+        
+        cursor = connection.cursor()
+        cursor.execute('SELECT count(*) FROM notes_user WHERE username LIKE "'+login+'" AND password LIKE "'+password+'"')
+        row = str(cursor.fetchone()[0])
+        print (row)
         try:
-            
-            if (User.objects.raw('SELECT count(*) FROM notes_user WHERE username LIKE "'+login+'" AND password LIKE "'+password+'"') == 1):
-            
-                return Response({'message': 'Note created successfully'}, status=status.HTTP_200_OK)
+            if (row == "1"):
+                return Response({'message': 'User found'}, status=status.HTTP_200_OK)
             else:
                 return Response({'error': 'User not found'}, status=status.HTTP_418_IM_A_TEAPOT)
         except:
