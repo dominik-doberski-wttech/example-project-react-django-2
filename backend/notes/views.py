@@ -51,11 +51,17 @@ class HandleUserConnction(APIView):
         password = str(request.data.get('password'))  # Assuming owner is an ID
         print(login+password)
         
+<<<<<<< HEAD
         
         cursor = connection.cursor()
         cursor.execute('SELECT count(*) FROM notes_user WHERE username LIKE "'+login+'" AND password LIKE "'+password+'"')
         row = str(cursor.fetchone()[0])
         print (row)
+=======
+        login = request.data.get('login')
+        password = request.data.get('password')  # Assuming owner is an ID
+        
+>>>>>>> 9a92eb994ff4117a57f2dff98d6cc9f6e2edb4c3
         try:
             if (row == "1"):
                 return Response({'message': 'User found'}, status=status.HTTP_200_OK)
