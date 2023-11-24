@@ -36,3 +36,14 @@ class CreateNoteView(APIView):
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+class LoginView(APIView):
+    def post(self, request):
+        userUsername = request.data.get('userUsername')
+        userPassword = request.data.get('userPassword')
+        try:
+            user = User.objects.get(username=userUsername, password=userPassword)
+            return Response({'message': 'User found!'}, status=status.HTTP_202_ACCEPTED)
+        except User.DoesNotExist:
+            return Response({'error': 'User not found'})
+    
