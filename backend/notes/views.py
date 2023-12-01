@@ -48,7 +48,7 @@ class LoginView(APIView):
                 Session.set_user_id(user.pk)
                 Session.set_username(user.username)
                 Session.set_password(user.password)
-                return Response({'message': 'User found!','userID':Session.get_user_id}, status=status.HTTP_200_OK)
+                return Response({'message': 'User found!','sessionID':Session.get_session_id}, status=status.HTTP_200_OK)
         except User.DoesNotExist:
             return Response({'error': 'User not found'}, status=status.HTTP_401_UNAUTHORIZED)
     
