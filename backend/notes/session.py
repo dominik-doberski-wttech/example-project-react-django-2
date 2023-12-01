@@ -1,20 +1,20 @@
 class Session(object):
-    def GetUsername(self, request):
+    def get_username(self, request):
         userName = request.session.get('username', None)
         return userName
 
-    def GetPassword(self, request):
+    def get_password(self, request):
         password = request.session.get('password', None)
         return password
 
-    def GetUserId(self, request):
-        userID = request.session.get('userID', None)
+    def get_user_id(self, request):
+        user_id = request.session.get('user_id', None)
 
-    def PostUsername(self, request, username):
+    def set_username(self, request, username):
         request.session['username'] = username
 
-    def PostPassword(self, request, password):
+    def set_password(self, request, password):
         request.session['password'] = password
     
-    def PostUserID(self, request, userID):
-        request.session['userID'] = userID
+    def set_user_id(self, request, user_id):
+        request.session['user_id'] = user_id
