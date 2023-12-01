@@ -39,11 +39,11 @@ class CreateUserView(generics.CreateAPIView):
 
 class LoginView(APIView):
     def post(self, request):
-        userUsername = request.data.get('userUsername')
-        userPassword = request.data.get('userPassword')
+        username = request.data.get('username')
+        password = request.data.get('password')
         try:
-            user = User.objects.get(username=userUsername, password=userPassword)
-            return Response({'message': 'User found!'}, status=status.HTTP_202_ACCEPTED)
+            user = User.objects.get(username=username, password=password)
+            return Response({'message': 'User found!'}, status=status.HTTP_200_OK)
         except User.DoesNotExist:
             return Response({'error': 'User not found'})
     
