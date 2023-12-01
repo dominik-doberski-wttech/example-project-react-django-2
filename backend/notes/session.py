@@ -1,4 +1,4 @@
-class sesja(object):
+class Session(object):
     def GetUsername(self, request):
         userName = request.session.get('username', None)
         return userName
