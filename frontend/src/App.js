@@ -4,6 +4,23 @@ import {API_URL} from "./constants";
 
 function App() {
 
+    const [loginValue, setLoginValue] = useState('');
+    const [passValue, setPassValue] = useState('');
+
+    const handleLoginChange = (event) => {
+        setLoginValue(event.target.value);
+      };
+    
+      const handlePassChange = (event) => {
+        setPassValue(event.target.value);
+      };
+    
+      const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log('Login:', loginValue);
+        console.log('Hasło:', passValue);
+      };
+
     const [notes, setNotes] = useState([]);
     const [newNote, setNewNote] = useState({note_text: "", username: ""});
 
@@ -51,6 +68,25 @@ function App() {
         }
     };
 
+    // function MyForm(){
+    //     const [loginValue, setLoginValue] = useState('');
+    //     const [passValue, setPassValue] = useState('');
+
+    //     const handleLoginChange = (event) => {
+    //         setLoginValue(event.target.value);
+    //       };
+        
+    //       const handlePassChange = (event) => {
+    //         setPassValue(event.target.value);
+    //       };
+        
+    //       const handleSubmit = (event) => {
+    //         event.preventDefault();
+    //         console.log('Login:', loginValue);
+    //         console.log('Hasło:', passValue);
+    //       };
+    // };
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -79,8 +115,26 @@ function App() {
     return (
         <div>
             <h1>Notes App</h1>
-            <div>
+            <form onSubmit={handleSubmit}>
                 <input
+                    type='text'
+                    placeholder='login'
+                    value={loginValue}
+                    onChange={handleLoginChange}
+                    name='login'
+                /> <br />
+                <input
+                    type='password'
+                    placeholder='hasło'
+                    value={passValue}
+                    onChange={handlePassChange}
+                    name='haslo'
+                /> <br />
+                <button type="submit">Wyślij</button>
+            </form>
+            <br></br>
+            <div>
+                {/* <input
                     type="text"
                     placeholder="username"
                     name="username"
@@ -94,7 +148,7 @@ function App() {
                     value={newUser.password}
                     onChange={(e) => onUserChange(e)}
                 />
-                <button onClick={addUser}>Add</button>
+                <button onClick={addUser}>Add</button> */}
             </div>
             <div>
                 <input
