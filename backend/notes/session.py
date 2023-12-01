@@ -9,6 +9,7 @@ class Session(object):
 
     def get_user_id(self, request):
         user_id = request.session.get('user_id', None)
+        return user_id
 
     def set_username(self, request, username):
         request.session['username'] = username
