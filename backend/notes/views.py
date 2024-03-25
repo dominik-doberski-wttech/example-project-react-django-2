@@ -20,7 +20,12 @@ class UserView(generics.ListAPIView):
 class CreateNoteView(APIView):
     def post(self, request):
         note_text = request.data.get('note_text')
-        owner_id = request.data.get('owner')  # Assuming owner is an ID
+        owner_username = request.data.get('owner')  # Owner is username
+        print(note_text, owner_username)
+        try:
+            owner_id = User.objects.get(username=owner_username).id
+        except User.DoesNotExist:
+            return Response({'error': 'User not found'})
         print(note_text, owner_id)
         try:
             owner = User.objects.get(id=owner_id)
